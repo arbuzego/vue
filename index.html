@@ -7,14 +7,28 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <div class="container pt-5" id="app">
-      <div class="card center">
-        <h1>{{title}}: {{counter}}</h1>
-        <div>
-          <button class="btn primary" v-on:click="counter++">+</button>
-          <button class="btn danger" v-on:click="counter--">-</button>
-          <button class="btn" v-on:click="counter=0">Сброс</button>
+    <div class="container" id="app">
+      <div class="card">
+        <h1>{{title}}</h1>
+        <div class="form-control">
+          <input
+            type="text"
+            v-bind:placeholder="placeholderString"
+            v-bind:value="inputValue"
+            v-on:input="inputChange"
+            v-on:keypress.enter="addNote"
+          />
         </div>
+        <button class="btn" v-on:click="addNote">Добавить</button>
+        <hr />
+        <ul class="list">
+          <li class="list-item" v-for="(note,idx) in notes">
+            {{idx+1}}. {{note}}
+            <button class="btn danger" v-on:click="deleteNote(idx)">
+              Удалить
+            </button>
+          </li>
+        </ul>
       </div>
     </div>
     <script src="https://unpkg.com/vue@next"></script>
